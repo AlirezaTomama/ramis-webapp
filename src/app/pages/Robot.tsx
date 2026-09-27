@@ -6,7 +6,7 @@ import { Switch } from "../components/ui/switch";
 import {
   Battery, Wifi, Radio, MapPin, Camera, Zap, Wind, Clock, ChevronRight,
   Bot, Maximize2, Download, Activity, CheckCircle, AlertTriangle,
-  RefreshCw, X,
+  RefreshCw, X, Home,
 } from "lucide-react";
 import uvTrapPhoto from "../../imports/image-4.png";
 import pheroTrapPhoto from "../../imports/image-5.png";
@@ -470,6 +470,7 @@ export function Robot() {
   const [fanStatus, setFanStatus]       = useState<CmdStatus>("active");
   const [ts, setTs]                     = useState("14:35:22");
   const [snapshotFlash, setSnapshotFlash] = useState(false);
+  const [returningToDock, setReturningToDock] = useState(false);
 
   // Live timestamp
   useEffect(() => {
@@ -552,7 +553,12 @@ export function Robot() {
             <Clock className="w-3 h-3" />
             Last cmd: Trap scan 14:32
           </div>
-          <div className="ml-auto">
+          <div className="ml-auto flex items-center gap-1.5">
+            <Button variant="outline" size="sm" disabled={returningToDock}
+              onClick={() => setReturningToDock(true)}
+              className="h-6 text-[10px] gap-1 border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 bg-transparent">
+              <Home className="w-3 h-3" /> {returningToDock ? "Returning…" : "Return to dock"}
+            </Button>
             <Link to="/heatmap">
               <Button variant="outline" size="sm"
                 className="h-6 text-[10px] gap-1 border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 bg-transparent">
